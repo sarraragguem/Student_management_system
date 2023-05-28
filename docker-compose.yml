@@ -1,13 +1,5 @@
 version: "3.7"
 services:
-  sms:
-    build: .
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      - mysql_db
-    command: sh -c './wait-for mysql_db:3306 -- npm start'
   mysql_db:
     image: "mysql:8.0"
     restart: always
@@ -18,3 +10,12 @@ services:
       MYSQL_USER: sarra_ilef_arij
       MYSQL_PASSWORD: forppp
       MYSQL_ROOT_PASSWORD: forppp
+  sms:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql_db
+    command: sh -c './wait-for mysql_db:3306 -- npm start'
+ 

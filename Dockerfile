@@ -1,16 +1,18 @@
-FROM eclipse-temurin:17-jdk-jammy as builder
+FROM   eclipse-temurin:17-jdk-jammy as builder
 RUN  apt  update
 RUN  apt install nodejs npm -y
 RUN npm install -g newman
+RUN apt-get -y install maven
 WORKDIR /opt/student-management-system
-COPY .mvn/ .mvn
+COPY ./junit-jupiter-api_5.9.1.jar ./
+RUN jar xf ./junit-jupiter-api_5.9.1.jar
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+RUN mvn dependency:go-offline
 COPY ./src ./src
-RUN ./mvnw clean install
+RUN mvn  clean install
  
-FROM eclipse-temurin:17-jre-jammy
-WORKDIR /opt/app
+FROM  eclipse-temurin:17-jdk-jammy
+WORKDIR /opt/student-management-system
 EXPOSE 8080
 COPY --from=builder /opt/student-management-system/target/*.jar /opt/app/*.jar
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar" ]
