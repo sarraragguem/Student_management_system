@@ -1,11 +1,15 @@
 package net.javaguides.sms.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.sms.entity.Student;
 import net.javaguides.sms.service.StudentService;
@@ -28,6 +32,14 @@ public class StudentController {
 		return "students";
 		
 	}
+	
+	@GetMapping("/Allstudents")
+	@ResponseBody
+	public List<Student> getAllStudents() {
+	    List<Student> students = studentService.getAllStudents();
+	    return students;
+	}
+
 	
 	@GetMapping("/students/new")
 	public String createStudentForm(Model model) {
