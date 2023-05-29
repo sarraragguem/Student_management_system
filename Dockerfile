@@ -5,10 +5,11 @@ RUN npm install -g newman
 RUN apt-get -y install maven
 WORKDIR /opt/student-management-system
 COPY ./ ./
-RUN mvn dependency:go-offline
+RUN mvn dependency:resolve
+RUN mvn package 
+CMD ["mvn", "spring-boot:run"]
 
-RUN mvn package
- 
+
 FROM  eclipse-temurin:17-jdk-jammy
 WORKDIR /opt/student-management-system
 EXPOSE 8080
