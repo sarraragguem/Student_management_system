@@ -1,4 +1,5 @@
 package integration_tests;
+import org.junit.Test;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -11,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,8 +28,8 @@ import net.javaguides.sms.StudentManagementSystemApplication;
 import net.javaguides.sms.controller.StudentController;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = StudentManagementSystemApplication.class)
-// @WebMvcTest(StudentController.class)
+//@SpringBootTest(classes = StudentManagementSystemApplication.class)
+@WebMvcTest(StudentController.class)
 @AutoConfigureMockMvc
 public class StudentControllerTest {
 
