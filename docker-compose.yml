@@ -10,6 +10,7 @@ services:
       MYSQL_USER: sarra_ilef_arij
       MYSQL_PASSWORD: forppp
       MYSQL_ROOT_PASSWORD: forppp
+    restart: on-failure
   sms:
     build: .
     restart: always
@@ -17,5 +18,5 @@ services:
       - 8080:8080
     depends_on:
       - mysql_db
-    command: sh -c './wait-for mysql_db:3306 -- npm start'
+    
  
